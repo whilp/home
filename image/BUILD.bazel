@@ -1,0 +1,44 @@
+load(":image.bzl", "image_package_files")
+load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar")
+load(
+    "@io_bazel_rules_docker//container:container.bzl",
+    "container_image",
+)
+
+container_image(
+    name = "image",
+    base = "@ubuntu//image",
+    debs = image_package_files(),
+    # Force rebuild when we observe new packages.
+    files = ["//image:image.bzl"],
+    tars = [
+        ":nvim",
+        ":etc",
+        ":etc_ssl",
+    ],
+)
+
+pkg_tar(
+    name = "etc_ssl",
+    package_dir = "/etc/ssl",
+    srcs = ["@cacert//file"],
+)
+
+pkg_tar(
+    name = "etc",
+    package_dir = "/etc",
+    srcs = [
+        "gitconfig",
+    ]
+)
+
+genrule(
+    name = "nvim",
+    outs = ["nvim.tar"],
+    cmd = ("$(location @nvim//file) --appimage-extract"
+        + "&& tar -C squashfs-root --sort=name --mtime='2018-01-01 00:00Z' --owner=0 --group=0 --numeric-owner -cf $@ ."
+    ),
+    tools = [
+        "@nvim//file",
+    ],
+)
