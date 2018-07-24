@@ -9,7 +9,7 @@ def main(args, env):
     return write_image_bzl(sys.stdin, sys.stdout)
 
 def write_image_bzl(input, output):
-    pkgs = list(parse(input))
+    pkgs = sorted(parse(input))
 
     output.write(gen_image_packages(pkgs))
     output.write("\n\n\n")
