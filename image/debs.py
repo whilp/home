@@ -35,6 +35,7 @@ def pkg(line):
     label = "ubuntu_" + (name
         .replace("-", "_")
         .replace(".", "_")
+        .replace("+", "P")
     )
     return (label, url)
 

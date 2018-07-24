@@ -23,7 +23,7 @@ container_pull(
   digest = "sha256:30e04ddada6eb09c12330c7df72cad1573916c7100168c34076808169ff6d805"
 )
 
-load("//image:image.bzl", "image_packages")
+load("//image:debs.bzl", "image_packages")
 
 image_packages()
 

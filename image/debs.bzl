@@ -56,12 +56,12 @@ def image_packages():
     )
 
     native.http_file(
-        name = "ubuntu_g++",
+        name = "ubuntu_gPP",
         url = "http://archive.ubuntu.com/ubuntu/pool/main/g/gcc-defaults/g++_7.3.0-3ubuntu2_amd64.deb",
     )
 
     native.http_file(
-        name = "ubuntu_g++_7",
+        name = "ubuntu_gPP_7",
         url = "http://archive.ubuntu.com/ubuntu/pool/main/g/gcc-7/g++-7_7.3.0-16ubuntu3_amd64.deb",
     )
 
@@ -481,7 +481,7 @@ def image_packages():
     )
 
     native.http_file(
-        name = "ubuntu_libstdc++_7_dev",
+        name = "ubuntu_libstdcPP_7_dev",
         url = "http://archive.ubuntu.com/ubuntu/pool/main/g/gcc-7/libstdc++-7-dev_7.3.0-16ubuntu3_amd64.deb",
     )
 
@@ -694,8 +694,8 @@ def image_package_files():
         '@ubuntu_dpkg_dev//file',
         '@ubuntu_fakeroot//file',
         '@ubuntu_file//file',
-        '@ubuntu_g++//file',
-        '@ubuntu_g++_7//file',
+        '@ubuntu_gPP//file',
+        '@ubuntu_gPP_7//file',
         '@ubuntu_gcc//file',
         '@ubuntu_gcc_7//file',
         '@ubuntu_gcc_7_base//file',
@@ -779,7 +779,7 @@ def image_package_files():
         '@ubuntu_libsqlite3_0//file',
         '@ubuntu_libssl1_0_0//file',
         '@ubuntu_libssl1_1//file',
-        '@ubuntu_libstdc++_7_dev//file',
+        '@ubuntu_libstdcPP_7_dev//file',
         '@ubuntu_libtsan0//file',
         '@ubuntu_libubsan0//file',
         '@ubuntu_libwind0_heimdal//file',

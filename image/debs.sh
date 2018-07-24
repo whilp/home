@@ -13,4 +13,4 @@ docker run --rm -ti ubuntu:18.04 /bin/bash -c \
     unzip \
     python \
     " \
-    | python image/debs.py > image/image.bzl
+    | python image/debs.py > image/debs.bzl

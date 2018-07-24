@@ -1,8 +1,16 @@
-load(":image.bzl", "image_package_files")
+load(":debs.bzl", "image_package_files")
 load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar")
 load(
     "@io_bazel_rules_docker//container:container.bzl",
     "container_image",
+)
+
+sh_binary(
+    name = "run",
+    srcs = ["run.sh"],
+    data = [
+    	":image",
+    ],
 )
 
 container_image(
@@ -10,26 +18,52 @@ container_image(
     base = "@ubuntu//image",
     debs = image_package_files(),
     # Force rebuild when we observe new packages.
-    files = ["//image:image.bzl"],
+    files = ["//image:debs.bzl"],
     tars = [
         ":nvim",
         ":etc",
-        ":etc_ssl",
+        ":etc_ssl_certs",
+        ":usr_bin",
     ],
 )
 
 pkg_tar(
-    name = "etc_ssl",
-    package_dir = "/etc/ssl",
+    name = "etc_ssl_certs",
+    package_dir = "/etc/ssl/certs",
+    srcs = [":ca_certificates_crt"],
+)
+
+genrule(
+    name = "ca_certificates_crt",
+    outs = ["ca-certificates.crt"],
+    cmd = "cp $(location @cacert//file) $@",
     srcs = ["@cacert//file"],
 )
 
 pkg_tar(
     name = "etc",
     package_dir = "/etc",
+    mode = "0644",
     srcs = [
         "gitconfig",
     ]
+)
+
+pkg_tar(
+    name = "usr_bin",
+    package_dir = "/usr/bin",
+    mode = "0755",
+    srcs = [
+    	":bazel",
+    ]
+)
+
+genrule(
+    name = "bazel_exe",
+    outs = ["bazel"],
+    executable = True,
+    cmd = "cp $(location @bazel//file) $@",
+    srcs = ["@bazel//file"],
 )
 
 genrule(
