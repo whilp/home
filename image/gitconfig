@@ -1,2 +1,0 @@
-[http]
-        sslCAinfo = /etc/ssl/cacert.pem

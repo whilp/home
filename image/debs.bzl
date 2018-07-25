@@ -371,6 +371,11 @@ def image_packages():
     )
 
     native.http_file(
+        name = "ubuntu_libltdl7",
+        url = "http://archive.ubuntu.com/ubuntu/pool/main/libt/libtool/libltdl7_2.4.6-2_amd64.deb",
+    )
+
+    native.http_file(
         name = "ubuntu_libmagic1",
         url = "http://archive.ubuntu.com/ubuntu/pool/main/f/file/libmagic1_5.32-2ubuntu0.1_amd64.deb",
     )
@@ -757,6 +762,7 @@ def image_package_files():
         '@ubuntu_libldap_common//file',
         '@ubuntu_liblocale_gettext_perl//file',
         '@ubuntu_liblsan0//file',
+        '@ubuntu_libltdl7//file',
         '@ubuntu_libmagic1//file',
         '@ubuntu_libmagic_mgc//file',
         '@ubuntu_libmpc3//file',

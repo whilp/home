@@ -15,5 +15,11 @@ def image_files():
     native.http_file(
 	name = "bazel",
 	url = "https://github.com/bazelbuild/bazel/releases/download/0.15.2/bazel-0.15.2-linux-x86_64",
-	#sha256 = "",
+	sha256 = "3e18f78e194acc5d05968a0c1d7708bd6fb6b99a2bcc1a3cd46e642f51d0a277",
+    )
+
+    native.http_file(
+	name = "docker",
+	url = "https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce_18.06.0~ce~3-0~ubuntu_amd64.deb",
+	sha256 = "65fa0f3e62312612810dfde4ffec8eba309bf75614f3071b2c7aa7db624d1b96",
     )
